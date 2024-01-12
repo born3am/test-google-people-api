@@ -2,7 +2,7 @@ import express from 'express';
 
 import getCredentials from './getCredentials.js';
 import { loadClientSecrets } from './googleAuth.js';
-import { createNewContact, listConnectionNames, listEmailsAndPhones } from './googlePeopleApi.js';
+import { createNewContact, listConnectionNames, listEmailsAndPhones } from './peopleApiServices.js';
 const router = express.Router();
 
 router.get('/codeRetrieved', (req, res) => {
@@ -88,6 +88,12 @@ router.get('/createNewContact', async (req, res) => {
   try {
     const oAuth2Client = await loadClientSecrets();
     const newContactData = await createNewContact(oAuth2Client);
+
+    if (!newContactData) {
+      res.send('Contact already exists. Duplicate not created.');
+      return;
+    }
+
     const newContactDataString = JSON.stringify(newContactData, null, 2); // 2 spaces of indentation
     const spacedNewContactData = newContactDataString.replace(/ /g, '&nbsp;').replace(/\n/g, '<br>');
 

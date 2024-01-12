@@ -2,29 +2,43 @@ import { google } from 'googleapis';
 
 import { newContactData } from '../config.js';
 
-export async function createNewContact(auth) {
+export async function createNewContact(auth, newData = newContactData) {
   const service = google.people({ version: 'v1', auth });
-  const { data } = await service.people.createContact({
-    requestBody: {
-      ...newContactData,
-    },
+
+  // Fetch existing contacts
+  const { data: existingContacts } = await service.people.connections.list({
+    resourceName: 'people/me',
+    pageSize: 100,
+    personFields: 'emailAddresses',
   });
+
+  // Check if a contact with the same email already exists
+  const isDuplicate = existingContacts.connections.some((contact) => {
+    const emailMatch = contact.emailAddresses?.some((email) => email.value.trim().toLowerCase() === newData.emailAddresses[0].value.trim().toLowerCase());
+    return emailMatch;
+  });
+
+  // If a duplicate exists, don't create a new contact
+  if (isDuplicate) {
+    console.log('A contact with the same email already exists.');
+    return false;
+  }
+
+  // Create a new contact
+  const { data } = await service.people.createContact({
+    requestBody: newData,
+  });
+
   console.log(data);
 
   return data;
 }
 
-/**
- * Print the display name if available for 10 connections.
- *
- * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
- */
 export async function listConnectionNames(auth) {
   const service = google.people({ version: 'v1', auth });
   const res = await service.people.connections.list({
     resourceName: 'people/me',
-    pageSize: 2,
-    personFields: 'names,emailAddresses',
+    personFields: 'names',
   });
 
   const { connections } = res.data;
