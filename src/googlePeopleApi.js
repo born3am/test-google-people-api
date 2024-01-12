@@ -1,41 +1,17 @@
 import { google } from 'googleapis';
 
+import { newContactData } from '../config.js';
+
 export async function createNewContact(auth) {
   const service = google.people({ version: 'v1', auth });
   const { data } = await service.people.createContact({
     requestBody: {
-      names: [
-        {
-          displayName: 'John Doe',
-          givenName: 'John',
-          familyName: 'Doe',
-        },
-      ],
-      emailAddresses: [
-        {
-          value: 'test@pakcon.de',
-        },
-      ],
-      phoneNumbers: [
-        {
-          value: '+55 (11) 99999-9999',
-        },
-      ],
-      addresses: [
-        {
-          streetAddress: 'Av. Paulista, 1234',
-          city: 'São Paulo',
-          state: 'São Paulo',
-          country: 'Brazil',
-          postalCode: '01310-100',
-          type: 'home',
-        },
-      ],
-      a,
+      ...newContactData,
     },
   });
-
   console.log(data);
+
+  return data;
 }
 
 /**
@@ -52,12 +28,12 @@ export async function listConnectionNames(auth) {
   });
 
   const { connections } = res.data;
-  console.log(res.data);
+  const names = [];
   if (connections) {
-    // console.log('Connections:');
     connections.forEach((person) => {
       if (person.names && person.names.length > 0) {
         console.log(person.names[0].displayName);
+        names.push(person.names[0].displayName);
       } else {
         console.log('No display name found for connection.');
       }
@@ -65,6 +41,7 @@ export async function listConnectionNames(auth) {
   } else {
     console.log('No connections found.');
   }
+  return names;
 }
 
 export async function listEmailsAndPhones(auth) {
@@ -77,23 +54,36 @@ export async function listEmailsAndPhones(auth) {
 
   const { connections } = data;
 
+  const contacts = [];
+
   if (connections) {
     connections.forEach((person) => {
+      let name = '';
+      let email = '';
+      let phone = '';
+
       if (person.names && person.names.length > 0) {
         console.log(person.names[0].displayName);
+        name = person.names[0].displayName;
       } else {
         console.log('No display name found for connection.');
       }
       if (person.emailAddresses && person.emailAddresses.length > 0) {
         console.log(person.emailAddresses[0].value);
+        email = person.emailAddresses[0].value;
       } else {
         console.log('No email found for connection.');
       }
       if (person.phoneNumbers && person.phoneNumbers.length > 0) {
         console.log(person.phoneNumbers[0].value);
+        phone = person.phoneNumbers[0].value;
       } else {
         console.log('No phone number found for connection.');
       }
+
+      contacts.push({ name, email, phone });
     });
   }
+
+  return contacts;
 }
