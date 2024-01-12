@@ -37,6 +37,7 @@ async function getNewToken(oAuth2Client) {
     // code will be show in the URL in the format "code=4/ABCD...&scope=https://www.googleapis.com/auth/contacts" The code is the part between code= and &scope
     rl.question('Enter the code from that page here: ', (userCode) => {
       rl.close();
+
       resolve(userCode);
     });
   });
