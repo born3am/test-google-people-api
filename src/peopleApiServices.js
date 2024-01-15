@@ -34,7 +34,7 @@ export async function createNewContact(auth, newData = newContactData) {
   return data;
 }
 
-export async function listConnectionNames(auth) {
+export async function getContactNames(auth) {
   const service = google.people({ version: 'v1', auth });
   const res = await service.people.connections.list({
     resourceName: 'people/me',
@@ -58,7 +58,7 @@ export async function listConnectionNames(auth) {
   return names;
 }
 
-export async function listEmailsAndPhones(auth) {
+export async function getEmailsAndPhones(auth) {
   const service = google.people({ version: 'v1', auth });
   const { data } = await service.people.connections.list({
     resourceName: 'people/me',

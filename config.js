@@ -18,7 +18,7 @@ export const newContactData = {
   ],
   emailAddresses: [
     {
-      value: 'pedrinho@pakcon.de',
+      value: 'test@pakcon.de',
     },
   ],
   phoneNumbers: [

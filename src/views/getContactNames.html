@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Get Contact Names</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        margin: 0 auto;
+        max-width: 800px;
+        padding: 20px;
+      }
+      .code {
+        background-color: #f8f8f8;
+        border: 1px solid #ccc;
+        padding: 10px;
+        font-family: monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>List Contact Names successful!</h1>
+      <p>TOTAL: <%= connectionNames.length %></p>
+      <div class="code">NAMES: <%= connectionNames.join(', ') %></div>
+    </div>
+  </body>
+</html>

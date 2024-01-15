@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Emails and Phones</title>
+  </head>
+  <body>
+    <h1>List Emails and Phones successful!</h1>
+    <p><b>TOTAL</b>: <%= contacts.length %></p>
+    <p><b>CONTACTS</b>:</p>
+    <ul>
+      <% contacts.forEach((contact) => { %>
+        <li><%= JSON.stringify(contact) %></li>
+      <% }); %>
+    </ul>
+  </body>
+</html>
