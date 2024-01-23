@@ -8,32 +8,43 @@ export const CREDENTIALS_PATH = './secret/credentials.json';
 
 export const PORT = 4001;
 
-export const newContactData = {
-  names: [
-    {
-      displayName: 'Joaozinho',
-      givenName: 'Joaozinho',
-      familyName: 'Joaozinho',
-    },
-  ],
-  emailAddresses: [
-    {
-      value: 'test@pakcon.de',
-    },
-  ],
-  phoneNumbers: [
-    {
-      value: '+55 (11) 99999-9999',
-    },
-  ],
-  addresses: [
-    {
-      streetAddress: 'Av. Paulista, 1234',
-      city: 'São Paulo',
-      region: 'São Paulo',
-      country: 'Brazil',
-      postalCode: '01310-100',
-      type: 'home',
-    },
-  ],
+export const contactTestData = {
+  namePartOne: 'Peter',
+  email: 'user@user.com',
+  phone: '2222222',
+  namePartTwo: 'PC-NETFLIX',
+  resourceName: 'people/c443589039318347139',
 };
+
+export const resourceNameTestData = "people/c443589039318347139"
+
+
+export const contactBatchTestData = [
+  {
+    namePartOne: 'John',
+    email: 'john@test.de',
+    phone: '222222',
+    namePartTwo: 'PC-DISNEY',
+    resourceName: 'people/c8610505935101117100'
+  },
+  {
+    namePartOne: 'Jack',
+    email: 'jack@test.de',
+    phone: '222222',
+    namePartTwo: 'PC-APPLE',
+    resourceName: 'people/c8540850829724236721'
+  },
+  {
+    namePartOne: 'Jane',
+    email: 'jane@test.de',
+    phone: '22222222',
+    namePartTwo: 'PC-AMAZON',
+    resourceName: 'people/c9172963066780866448'
+  },
+];
+
+export  const resourceNameBatchTestData = [
+  'people/c8610505935101117100',
+  'people/c8540850829724236721',
+  'people/c9172963066780866448',
+];

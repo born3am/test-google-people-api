@@ -32,7 +32,12 @@ app.listen(PORT, () => {
   4. With the token.json file saved locally, you can now use the google APIs options in the routes:
     - http://localhost:${PORT}/getContactNames
     - http://localhost:${PORT}/getEmailsAndPhones
-    - http://localhost:${PORT}/createNewContact
+    - http://localhost:${PORT}/createContact
+    - http://localhost:${PORT}/deleteContact
+    - http://localhost:${PORT}/updateContact
+    - http://localhost:${PORT}/batchCreateContacts
+    - http://localhost:${PORT}/batchDeleteContacts
+    - http://localhost:${PORT}/batchUpdateContacts
  
 
   `);
